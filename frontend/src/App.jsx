@@ -1,19 +1,27 @@
-import { Container } from 'react-bootstrap'
-import './bootstrap.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import { Container } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import './bootstrap.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
 
 function App() {
   return (
-    <main>
+    <BrowserRouter>
       <Header />
-      
+      <main>
         <Container>
-        <h1>Welcome!</h1>
+          <Routes>
+            <Route path="/home" element={<HomeScreen />} exact />
+            <Route path="*" element={<Navigate to="/home" />} />
+            <Route path="/product/:id" element={<ProductScreen />} />
+          </Routes>
         </Container>
-        <Footer />
       </main>
-  )
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

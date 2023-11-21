@@ -50,6 +50,10 @@ h1 {
   line-height: 1.1;
 }
 
+h3 {
+  padding:1rem 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -67,6 +71,22 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.navbar-menu {
+  padding-right: 2%;
+  padding-left: 4%;
+}
+
+.card-strong {
+  color: black;
+  padding: 1%;
+  margin: 1rem;
+  font-size: medium;
+}
+
+.rating span {
+  margin:0.1rem;
 }
 
 @media (prefers-color-scheme: light) {
