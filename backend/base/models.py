@@ -9,7 +9,7 @@ class Product(models.Model):
     name = models.CharField(
         max_length=200, null=True, blank=True
     )  # null=True means that it is optional
-    # image =
+    image = models.ImageField(null=True, blank=True, default="/placeholder.png")
     brand = models.CharField(max_length=200, null=True, blank=True)
     category = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
