@@ -2,13 +2,18 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from typing import List
+
+from .models import Product
 
 from .products import products
+from .serializers import ProductSerializer
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
 @api_view(["GET"])
-def get_routes(request):
+def get_routes(request) -> List[str]:
     routes = [
         "/api/products/",
         "/api/products/create/",
@@ -18,21 +23,21 @@ def get_routes(request):
         "/api/products/<id>/",
         "/api/products/delete/<id>/",
         "/api/products/<update>/<id>/",
+        "/api/product/<id>",
     ]
     return Response(routes)
 
 
 @api_view(["GET"])
 def get_products(request):
-    return Response(products)
+    product = Product.objects.all()
+    serializer = ProductSerializer(product, many=True)
+    return Response(serializer.data)
 
 
 @api_view(["GET"])
 def get_product(request, pk):
-    product = None
-    for i in products:
-        if i["_id"] == pk:
-            product = i
-            break
-
-    return Response(product)
+    # Querying the database for the product
+    product = get_object_or_404(Product, pk=pk)
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)

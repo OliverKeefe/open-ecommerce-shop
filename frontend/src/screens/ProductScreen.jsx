@@ -10,19 +10,19 @@ function ProductScreen() {
   const [product, setProduct] = useState([])
   useEffect(() => {
     async function fetchProduct() {
-      const { data } = await axios.get(`/api/products/${id}`);
+      const { data } = await axios.get(`/api/product/${id}`);
       setProduct(data)
     }
     
     fetchProduct()
   }, [])
-
+  const imageUrl = `http://localhost:8000/${product.image}`;
   return (
     <div>
       <Link to='/' className='btn btn-light my-3'>{"<"} Back</Link>
       <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name} fluid />
+          <Image src={imageUrl} alt={product.name} fluid />
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
